@@ -8,5 +8,6 @@ urlpatterns = [
     path('likes/<int:postid>/', views.upvote),
     path('dislikes/<int:postid>/', views.downvote),
     path('sortscore/<int:post>/', views.sortscore, name='sortscore'),
-    path('mostpopular/', views.mostpopular)
+    path('mostpopular/', views.mostpopular),
+    path('ghostsubmission/', views.ghostsubmission)
 ]

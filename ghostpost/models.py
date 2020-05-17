@@ -7,8 +7,8 @@ from django.utils import timezone
 class BoastsRoasts(models.Model):
     boolean = models.BooleanField()
     body = models.CharField(max_length=280)
-    upvotes = models.IntegerField()
-    downvotes = models.IntegerField()
+    upvotes = models.IntegerField(default=0)
+    downvotes = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
     score = models.IntegerField(default=0)
 

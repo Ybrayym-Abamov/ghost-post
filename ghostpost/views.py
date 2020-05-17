@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from ghostpost.models import BoastsRoasts
+from ghostpost.form import GhostPost
 
 # Create your views here.
 
@@ -43,3 +44,17 @@ def sortscore(request, post):
 def mostpopular(request):
     data = BoastsRoasts.objects.all().order_by('-score')
     return render(request, 'main.html', {'data': data})
+
+
+def ghostsubmission(request):
+    if request.method == "POST":
+        form = GhostPost(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            BoastsRoasts.objects.create(
+                boolean=data['boolean'],
+                body=data['body']
+            )
+            return HttpResponseRedirect(reverse('homepage'))
+    form = GhostPost()
+    return render(request, 'ghost.html', {'form': form})
