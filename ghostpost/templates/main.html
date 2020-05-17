@@ -1,0 +1,21 @@
+<h2><a href="/">HOME</a></h2>
+<div align='center'>
+<h1> The GhostPost Machine™ </h1>
+<button><a href="/boasts/">Boasts</a></button> | 
+<button><a href="/roasts/">Roasts</a></button> | 
+<button><a href="/mostpopular/">Most Popular</a></button>
+{% for foo in data %}
+    <p>
+        {% if foo.boolean %}
+            <h3>Boast</h3>
+        {% elif not foo.boolean%}
+            <h3>Roast</h3>
+        {% endif %}
+        <h4>{{foo.body}}</h4>
+        <div style="color:grey"> Time posted - {{foo.datetime}}</div>
+    </p>
+    <h4>Score - {{foo.score}}</h4>
+    <button><a href="/likes/{{foo.id}}/">Like</a></button>: {{ foo.upvotes }} | 
+    <button><a href="/dislikes/{{foo.id}}">Dislike</a></button>: {{ foo.downvotes }}
+{% endfor %}
+</div>
