@@ -9,5 +9,7 @@ urlpatterns = [
     path('dislikes/<int:postid>/', views.downvote),
     path('sortscore/<int:post>/', views.sortscore, name='sortscore'),
     path('mostpopular/', views.mostpopular),
-    path('ghostsubmission/', views.ghostsubmission)
+    path('ghostsubmission/', views.ghostsubmission),
+    # extra credit
+    path('delete/<int:id>/', views.delete_post)
 ]

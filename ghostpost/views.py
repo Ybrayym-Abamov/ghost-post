@@ -58,3 +58,10 @@ def ghostsubmission(request):
             return HttpResponseRedirect(reverse('homepage'))
     form = GhostPost()
     return render(request, 'ghost.html', {'form': form})
+
+
+# extra credit
+def delete_post(request, id):
+    post = BoastsRoasts.objects.get(id=id)
+    post.delete()
+    return HttpResponseRedirect(reverse('homepage'))
