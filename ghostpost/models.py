@@ -1,7 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from string import ascii_lowercase
-from random import choice
 
 
 class BoastsRoasts(models.Model):
@@ -11,11 +9,11 @@ class BoastsRoasts(models.Model):
     downvotes = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
     score = models.IntegerField(default=0)
-    secret_id = models.CharField(
-        max_length=10,
-        default=''.join(choice(ascii_lowercase) for i in range(10)))
+    secret_id = models.CharField(unique=True, max_length=10)
 
+    # def __str__(self):
+    #     if self.boolean:
+    #         return "Boast"
+    #     return "Roast"
     def __str__(self):
-        if self.boolean:
-            return "Boast"
-        return "Roast"
+        return self.secret_id

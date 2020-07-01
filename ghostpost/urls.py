@@ -11,5 +11,6 @@ urlpatterns = [
     path('mostpopular/', views.mostpopular),
     path('ghostsubmission/', views.ghostsubmission),
     # extra credit
-    path('delete/<int:id>/', views.delete_post)
+    path('posts/<str:private_key>/', views.private_view, name='private'),
+    path('delete/<str:pk>/', views.delete_post)
 ]

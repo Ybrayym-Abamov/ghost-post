@@ -18,6 +18,8 @@
     <h4>Score - {{foo.score}}</h4>
     <button><a href="/likes/{{foo.id}}/">Like</a></button>: {{ foo.upvotes }} | 
     <button><a href="/dislikes/{{foo.id}}/">Dislike</a></button>: {{ foo.downvotes }} |
-    <button><a href="/delete/{{foo.id}}/">Delete</a></button>
+    {% if foo.secret_id in request.path %}
+        <button><a href="/delete/{{foo.id}}/">Delete</a></button>
+    {% endif %}
 {% endfor %}
 </div>

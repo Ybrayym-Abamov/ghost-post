@@ -2,6 +2,9 @@ from django.shortcuts import render, reverse, HttpResponseRedirect
 from ghostpost.models import BoastsRoasts
 from ghostpost.form import GhostPost
 
+from string import ascii_lowercase
+from random import choice
+
 # Create your views here.
 
 
@@ -51,17 +54,24 @@ def ghostsubmission(request):
         form = GhostPost(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            key = ''.join(choice(ascii_lowercase) for i in range(10))
             BoastsRoasts.objects.create(
                 boolean=data['boolean'],
-                body=data['body']
+                body=data['body'],
+                secret_id=key
             )
-            return HttpResponseRedirect(reverse('homepage'))
+            return render(request, 'delete.html', {'key': key})
     form = GhostPost()
     return render(request, 'ghost.html', {'form': form})
 
 
 # extra credit
-def delete_post(request, id):
-    post = BoastsRoasts.objects.get(id=id)
+def private_view(request, private_key):
+    data = BoastsRoasts.objects.get(secret_id=private_key)
+    return render(request, 'main.html', {'data': data})
+
+
+def delete_post(request, pk):
+    post = BoastsRoasts.objects.get(secret_id=pk)
     post.delete()
     return HttpResponseRedirect(reverse('homepage'))
