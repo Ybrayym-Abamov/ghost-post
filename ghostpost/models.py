@@ -11,9 +11,7 @@ class BoastsRoasts(models.Model):
     score = models.IntegerField(default=0)
     secret_id = models.CharField(unique=True, max_length=10)
 
-    # def __str__(self):
-    #     if self.boolean:
-    #         return "Boast"
-    #     return "Roast"
     def __str__(self):
-        return self.secret_id
+        if self.boolean:
+            return "Boast"
+        return "Roast"
